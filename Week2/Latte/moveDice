@@ -1,0 +1,21 @@
+void moveDice(int from, int to, int[] map, int[] owners, int[] dice){
+        int moveableDice = 0;
+        if(owners[from] == owners[to]){
+            if(dice[from] > 1){
+                if(hasBorder(from, to, map)){
+                    moveableDice = dice[from] - 1;
+                    dice[to] += moveableDice;
+                    dice[from] = 1;
+                }
+                else{
+                    out.println("Area " + from + " and " + to + " do not share a border.");
+                }
+            }
+            else{
+                out.println("Area " + from + " does not have enough dice.");
+            }
+        }
+        else{
+            out.println("Area " + from + " and " + to + " do not share an owner.");
+        }
+    }
