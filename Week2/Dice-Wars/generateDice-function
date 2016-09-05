@@ -1,0 +1,16 @@
+int generateDice(int region, int[] map, int[] owner)
+{
+    //Returns an integer based on the number of surrounding allied regions
+    int self_owner = owner[region];
+    int num = 0;
+    
+    for (int i = 0;i<9;i++){                //Loop through all regions
+        if (i == region)                    //Ignore the region that's being processed
+            continue;
+        if (owner[i] == self_owner)         // Check if ally
+            if (hasBorder(region,i,map))    // Check if nearby
+                num++;                      // If so, count 
+        
+    }
+    return num;
+}
