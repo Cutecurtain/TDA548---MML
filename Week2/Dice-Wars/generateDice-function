@@ -1,16 +1,22 @@
 int generateDice(int region, int[] map, int[] owner)
 {
     //Returns an integer based on the number of surrounding allied regions
+    /*
+    Neighbours: 0       1-2     3-4     5+
+    Reward:     1 to 2  2 to 3  3 to 4  4 to 5
+     */
+    
     int self_owner = owner[region];
     int num = 0;
-    
+
     for (int i = 0;i<9;i++){                //Loop through all regions
         if (i == region)                    //Ignore the region that's being processed
             continue;
         if (owner[i] == self_owner)         // Check if ally
             if (hasBorder(region,i,map))    // Check if nearby
-                num++;                      // If so, count 
-        
+                num++;                      // If so, count
+
     }
-    return num;
-}
+    int span_min[] = {1,2,2,3,3,4};
+    return new Random().nextInt(2)+span_min[Math.min(num,5)];
+} 
