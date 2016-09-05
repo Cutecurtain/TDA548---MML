@@ -1,0 +1,11 @@
+boolean hasBorder(int i, int j, int[]map){
+        int iLen = (int)Math.log10(map[i]);
+
+        for(int x = 0; x < iLen; x++){
+            int y = (int)pow(10, x);
+            if(((map[i] / y) % 10) == j){
+                return true;
+            }
+        }
+        return false;
+    }
