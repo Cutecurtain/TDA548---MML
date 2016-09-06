@@ -1,0 +1,24 @@
+// Generates and distributes dice at the end of a player's turn
+    void distributeDice(int owner, int[] owners, int[] map, int[] dice){
+        int amountGenDice = 0;
+        int amountArea = 0;
+        int[] owned;
+        int x = 0;
+        
+        owned = new int[9];
+        Random rng = new Random();
+
+        // Checks how many areas the player owns, how many dice should be generated, and stores what areas the player owns
+        for(int i = 0; i < 9; i++){
+            if(owners[i] == owner){
+                amountArea++;
+                amountGenDice += generateDice(i, map, owners);
+                owned[x++] = i;
+            }
+        }
+
+        // Randomly distributes the player's dice across the board
+        for(int i = 0; i < amountGenDice; i++){
+            dice[owned[rng.nextInt(amountArea)]]++;
+        }
+    }
