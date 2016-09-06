@@ -1,0 +1,18 @@
+
+    int getAction(String player_name) {
+        out.print("What will " + player_name + " do?\n(1) Attack \n(2) Move \n (3) End turn\n > ");
+        int act;
+        while (true) {
+            try {
+                act = new Scanner(in).nextInt();
+                if (act >= 1 && act <= 3)
+                    return act;
+                else
+                    out.print("Out of bounds input > ");
+            }
+            catch
+            {
+                out.print("Invalid input > ");
+            }
+        }
+    }
