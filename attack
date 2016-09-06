@@ -1,0 +1,71 @@
+//Check where to move from
+    int moveFrom(int[] owners, int attacker, int[] dices) {
+        Scanner sc = new Scanner(in);
+        int from;
+
+        out.print("Move from: ");
+        from = sc.nextInt();
+        if (from >= 1 && from <= 9) {
+            if (owners[from - 1] == attacker) {
+                if(dices[attacker] > 1) {
+                    return from;
+                }
+                out.println("Not enough dice!");
+            } else {
+                out.println("Not your country!");
+            }
+        } else {
+            out.println("Does not exist!");
+        }
+        return 0;
+    }
+
+    //Check where to move to
+    int moveTo(int[] owners, int attacker, int[] map, int from) {
+        Scanner sc = new Scanner(in);
+        int to;
+
+        out.print("Move to: ");
+        to = sc.nextInt();
+        if (to >= 1 && to <= 9) {
+            if (owners[to - 1] != attacker) {
+                if(hasBorder(from-1, to-1, map)) {
+                    return to;
+                }
+
+            } else {
+                out.println("Can not attack your own country!");
+            }
+        } else {
+            out.println("Does not exist!");
+        }
+        return 0;
+    }
+
+    int attack(int[] owners, int attacker, int[] map, int[] dices) {
+        while(true) {
+            int from; //from where to attack
+            int to; //who's getting attacked
+            from = moveFrom(owners, attacker, dices);
+            to = moveTo(owners, attacker, map, from);
+
+            if(from > 0 && to > 0) {
+                int defender = to - 1; //Just because
+                int aDice, dDice; //Attacker dice and defender dice
+                int diff; //The difference between the aDice &dDice
+                aDice = throwDice(dices[attacker]);
+                dDice = throwDice(dices[defender]);
+                diff = aDice - dDice;
+                if(diff > 0) {
+                    return attacker;
+                }
+                else if(diff < 0) {
+                    return defender;
+                }
+                else {
+                    return -1; //-1 if tie
+                }
+            }
+            return -2; //-2 if nothing at all
+        }
+    }
