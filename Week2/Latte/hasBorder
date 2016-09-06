@@ -1,6 +1,9 @@
-boolean hasBorder(int i, int j, int[]map){
+// Checks if two areas share a border
+    boolean hasBorder(int i, int j, int[]map){
+        // How many information digits an area's border list has
         int iLen = (int)Math.log10(map[i]);
 
+        // Checks each number of the first area to see if any of them is the "name" of the second area
         for(int x = 0; x < iLen; x++){
             int y = (int)pow(10, x);
             if(((map[i] / y) % 10) == j){
