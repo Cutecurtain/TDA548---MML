@@ -1,8 +1,13 @@
-void moveDice(int from, int to, int[] map, int[] owners, int[] dice){
+// Moves all but one dice from one area of the map to another area of the map belonging to the same player
+    void moveDice(int from, int to, int owner, int[] map, int[] owners, int[] dice){
         int moveableDice = 0;
-        if(owners[from] == owners[to]){
+        // Checks if the player is using their own areas
+        if(owners[from] == owner && owners[to] == owner){
+            // Checks if the from area has enough dice for a move
             if(dice[from] > 1){
+                // Checks if the area shares a border
                 if(hasBorder(from, to, map)){
+                    // The move
                     moveableDice = dice[from] - 1;
                     dice[to] += moveableDice;
                     dice[from] = 1;
@@ -16,6 +21,6 @@ void moveDice(int from, int to, int[] map, int[] owners, int[] dice){
             }
         }
         else{
-            out.println("Area " + from + " and " + to + " do not share an owner.");
+            out.println("One or more of these areas does not belong to the correct owner.");
         }
     }
